@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#450502">
+    <link href="../../../libs/sui/css/sm.css" rel="stylesheet">
+    <link href="../../../libs/sui/css/sm-extend.css" rel="stylesheet">
+    <link href="../css/public.css" rel="stylesheet">
+    <script type='text/javascript' src="../../../libs/jquery/jquery-1.11.2.min.js" charset='utf-8'></script>
+    <script type="text/javascript" src="../../../libs/layer/layer.js"></script>
+    <title>商品详情</title>
+</head>
+<body>
+<!--分享-->
+<div style="font-size: 13px;display: none;" class="share" id="share">
+    <ul>
+        <li data-appkey="weixin" class="-mob-share-list -mob-share-weixin"><img src="../images/share/ic-weixin.png"/>微信好友</li>
+        <!--<li data-appkey="qzone" class="-mob-share-list -mob-share-qzone"><img src="../images/share/ic-qqkongjian.png"/>QQ空间</li>-->
+        <!--<li data-appkey="weibo" class="-mob-share-list share-weibo"><img src="../images/share/ic-weibo.png"/>新浪微博</li>-->
+        <li data-appkey="qq" class="-mob-share-list share-qq"><img src="../images/share/ic-qq.png"/>QQ好友</li>
+        <li data-appkey="pengyou" class="-mob-share-list -mob-share-weixin"><img src="../images/share/ic-pengyouquan.png"/>微信朋友圈</li>
+        <!--<li id="fxclick"><img src="../images/share/ic-lianjie.png"/>复制链接</li>-->
+    </ul>
+    <div class="clear"></div>
+    <div class="sharecancel" id="shareCancel"> 取消</div>
+</div>
+<div class="content">
+    <div class="less">
+        <!-- 轮播图-->
+        <div class="touchslider" id="touchslider" style="width:100%;position: relative;">
+            <div class="touchslider-viewport" style="width:100%;overflow:hidden;position: relative;">
+                <ul style="list-style: none;">
+                </ul>
+            </div>
+            <div class="viewpage" id="viewpage">
+            </div>
+        </div>
+        <div class="banner " style="">
+            <!-- 此处显示时，.nv 的 margin-top:0;#timeRow 的margin-top:1.3rem; -->
+            <div id="timeRow" style="display: none;">限时抢购</div>
+            <div class="nv">
+                <!-- 商品名称 好评率-->
+                <div style="width:100%;height:3rem;">
+                    <div class="timu" id="timu"></div>
+                    <!--<a class="disscussHref" href="">-->
+                    <div class="goodsDis">
+                        <p id="gooddiscuss"></p>
+                        <p style="font-size: 0.7rem;">好评率</p>
+                    </div>
+                    <!--</a>-->
+                </div>
+                <!-- 商品描述-->
+                <div class="timusmall" id="timusmall"></div>
+                <!--价格 库存 数量加减-->
+                <div class="row rowThree">
+                    <div class="rowLeft">
+                        <span class="xianjia" id="xianjia"></span>
+                        <span class="yuanjia" id="yuanjia"></span>
+                        <span style="color:#333;">库存: <span id="stock"></span></span>
+                    </div>
+                    <div style="width:25%;float:right;" class="huoWu">
+                        <div class="jiajian">
+                            <div class="btnAc" style="margin-left:-1rem;">
+                                <img src="../images/store/cutNum.png" class="min btnCut" alt=""/>
+                            </div>
+                            <!--<input class="min" name="" type="button" value="-" style="max-width:1rem;"/>-->
+                            <div class="btnAc">
+                                <input id="allnumber" class="text_box" name="goodnum" type="text" value="1"
+                                       style="width:2rem;text-align: center;color:#000;" disabled="disabled"/>
+                            </div>
+                            <!--<input class="add" name="" type="button" value="+" style="max-width:1rem;"/>-->
+                            <div class="btnAc">
+                                <img src="../images/store/addNum.png" class="add btnCut" alt=""/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 倒计时-->
+                <div class="rowFour endTimes" id="timeEnd" style="display: none;">
+                    <span class="textJl">距离结束仅剩</span>
+
+                    <span class="oneNumb t_h">01</span>
+                    <span class="oneText">时</span>
+                    <span class="oneNumb t_m">56</span>
+                    <span class="oneText">分</span>
+                    <span class="oneNumb t_s">54</span>
+                    <span class="oneText">秒</span>
+                    <!--<span class="oneNumb daycss t_d">0</span>-->
+                    <span class="threeText">件已售</span>
+                    <span class="saleNumb" id="saleNumbe">12345</span>
+                </div>
+            </div>
+            <!-- 规格-->
+            <div class="row rowFour" style="border-top: 1px solid #ddd;">
+                <div class="guige">
+                    <span class="nameFour"> <span class="spacTwo">规</span>格</span>
+                    <i id="guige" class="conFour"></i>
+                </div>
+
+            </div>
+            <!-- 产地-->
+            <div class="row rowFour">
+                <span class="nameFour"> <span class="spacTwo">产</span>地</span>
+                <i id="goodsorigin" class="conFour"></i>
+            </div>
+            <!-- 服务地区-->
+            <div class="row rowFour">
+                <span class="nameFour">服务地区</span>
+                <i id="serviceCity" class="conFour"></i>
+
+            </div>
+            <!-- 客服电话-->
+            <div class="row rowFour">
+                <span class="nameFour">客服电话</span>
+                <i class="conFour">4008-315-315</i>
+            </div>
+            <!--乐家认证等。。-->
+            <a>
+                <div class="row rowFour renzhengBiao" style="display: none;">
+                    <div style="width:90%;float: left;">
+                        <span id="baozheng" style="display: none;"><img src="../images/store/gou.png" alt=""/>乐家平台保证</span>
+                        <span id="tui" style="display: none;margin:-1.2rem 0 0 6rem"><img src="../images/store/gou.png" alt=""/>差必退</span>
+                        <span id="baoyou" style="display: none;margin: -1.2rem 0 0 9.5rem;"><img src="../images/store/gou.png" alt=""/>包邮</span>
+                        <!--<span id="zhiliang"><img src="../images/store/gou.png" alt=""/>商品质量保障体系</span>-->
+                    </div>
+                    <div style="width:10%;float:right;">
+                        <img class="zhankai" style="width: 0.4rem;" src="../images/store/zhankai.png">
+                    </div>
+                </div>
+            </a>
+            <a>
+                <div class="row rowFour renzhengTixi" style="display: none;">
+                    <div style="width:90%;float: left;">
+                        <span id="zhiliang"><img src="../images/store/gou.png" alt=""/>商品质量保障体系</span>
+                    </div>
+                    <div style="width:10%;float:right;">
+                        <img class="zhankai" style="width: 0.4rem;" src="../images/store/zhankai.png">
+                    </div>
+                </div>
+            </a>
+        </div>
+        <a class="goshopIn">
+            <div class="message">
+                <div class="name">
+                    <img class="touxiang" id="logo" src="">
+
+                    <div class="renzheng"><div class="storename"><i class="shopname" id="shopname"></i></div>
+                        <br>
+
+                        <div class="renzheng1"><i style="font-size: 0.7rem" id="renzheng"></i>
+                            <!--<i><img src="../images/store/renzheng.png"></i>-->
+                        </div>
+                    </div>
+                </div>
+                <!--  <div class="goshop">
+                      <a id="comestore" href="javascript:;">
+                          <button class="guang">进店逛逛</button>
+                      </a>
+                  </div>-->
+            </div>
+        </a>
+        <!--<iframe id="ifram" class="xiangqing" src="" width="100%" height="100%" scrolling="no"  frameborder="no"></iframe>-->
+        <div class="load1">
+            <div class="rect1"></div>
+            <div class="rect2"></div>
+            <div class="rect3"></div>
+            <div class="rect4"></div>
+            <div class="rect5"></div>
+        </div>
+        <div id="ifram">
+
+        </div>
+        <!--<div  class="xiangqing">-->
+        <!--<p>野生蘑菇野生蘑菇野生蘑菇野生蘑菇野生蘑菇野生蘑菇野生蘑菇野生蘑菇</p>-->
+        <!--<img src="../images/ws.jpg">-->
+
+        <!--<p>野生蘑菇野生蘑菇野生蘑菇野生蘑菇野生蘑菇野生蘑菇野生蘑菇野生蘑菇</p>-->
+        <!--<img src="../images/ws.jpg">-->
+
+        <!--<p>野生蘑菇野生蘑菇野生蘑菇野生蘑菇野生蘑菇野生蘑菇野生蘑菇野生蘑菇</p>-->
+        <!--<img src="../images/ws.jpg">-->
+
+        <!--<p>野生蘑菇野生蘑菇野生蘑菇野生蘑菇野生蘑菇野生蘑菇野生蘑菇野生蘑菇</p>-->
+        <!--<img src="../images/ws.jpg">-->
+
+        <!--</div>-->
+        <div class="bottomk"></div>
+    </div>
+</div>
+
+<!-- 工具栏 -->
+<!--<nav class="bar bar-tab">
+    <a class="tab-item external active" href="javascript:;">
+        <span class="tab-label">总计：¥<span id="zongji"></span></span>
+    </a>
+    <a class="tab-item external" id="cartCount">
+        <span class="icon"><img src="../images/store/gouwuche.png"></span>
+        <span class="badge"></span>
+    </a>
+    &lt;!&ndash;<a class="tab-item external" href="#">
+        <img src="../images/store/gouwuche.png">
+    </a>&ndash;&gt;
+
+    &lt;!&ndash;<span id="shopcart" class="tab-item external anniu" style="cursor:pointer"> 黄色&ndash;&gt;
+    <span id="shopcart" class="tab-item external anniu2" style="cursor:pointer">
+        加入购物车
+    </span>
+  &lt;!&ndash;  <span id="nowOrder" class="tab-item external anniu2" style="cursor:pointer" 枚红色>
+        立即下单
+    </span>&ndash;&gt;
+</nav>-->
+<!--<nav class="bar bar-tab">
+    <a class="tab-item" href="javascript:;">
+        <img class="help" src="../images/store/help.png" alt=""/>
+    </a>
+    <a class="tab-item" id="cartCount">
+        <img class="addCart" src="../images/store/shopcart.png" alt=""/>
+    </a>
+    &lt;!&ndash;<a class="tab-item external" href="#">
+        <img src="../images/store/gouwuche.png">
+    </a>&ndash;&gt;
+    <span id="shopcart" class="tab-item external anniu" style="cursor:pointer">
+        加入购物车
+    </span>
+      <span id="nowOrder" class="tab-item external anniu2" style="cursor:pointer">
+          立即下单
+      </span>
+</nav>-->
+<div class="row bottomCart">
+    <div class="col-20 borderRit" style="border-right: 1px solid #ddd;">
+        <a class="tab-item alert-text" href="javascript:;">
+            <img class="help" src="../images/store/help.png" alt=""/>
+        </a>
+    </div>
+    <div class="col-20">
+        <a class="tab-item" id="cartCount">
+            <img class="addCart" src="../images/store/shopcart.png" alt=""/>
+            <div id="cartSign" style="display: none;" class="addcart-goods-num"></div>
+            <!--<span class="badge"></span>-->
+        </a>
+    </div>
+    <div class="col-30">
+         <span id="shopcart" class="tab-item external anniu" style="cursor:pointer">
+        加入购物车
+        </span>
+    </div>
+    <div class="col-30">
+        <span id="nowOrder" class="tab-item external anniu2" style="cursor:pointer">
+          立即下单
+        </span>
+    </div>
+</div>
+<!--包邮跳转-->
+<!--<div class="page" id='route4'>
+    <header class="bar bar-nav" style="border-bottom: 1px solid #ddd;background: white;">
+        <a class="button button-link button-nav pull-left back" href="/docs-demos/router" style="color:#000">
+            <span class="icon icon-left"></span>
+        </a>
+        <h1 class='title'>保证说明</h1>
+    </header>
+    <div class="content" style="background: white;">
+        <div class="content-block bzsm" id="bzSm" >
+            <div class="divEve" id="ljBaozhang" style="display: none;">
+                <div>
+                    <img src="../images/store/chatui.png" alt=""/>
+                    <span class="baozhengText">乐家平台保障</span>
+                </div>
+                <div class="conTextt">海尔日日顺乐家,为您购物保障</div>
+            </div>
+            <div class="divEve" id="ljChabitui"  style="display: none;">
+                <div>
+                    <img src="../images/store/chatui.png" alt=""/>
+                    <span class="baozhengText">差必退</span>
+                </div>
+                <div class="conTextt">收到货后,质量太差?联系客服，申请退款退货，一经核实立即退赔!</div>
+            </div>
+            <div class="divEve" id="ljBaoyou"  style="display: none;">
+                <div>
+                    <img src="../images/store/chatui.png" alt=""/>
+                    <span class="baozhengText">包邮</span>
+                </div>
+                <div class="conTextt">商家承担运费</div>
+            </div>
+
+        </div>
+    </div>
+</div>-->
+<!--4.27修复闪烁bug-->
+<script>
+    document.getElementById("touchslider").style.minHeight = window.innerWidth+'px';
+</script>
+<link href="../css/store/goods.css" rel="stylesheet">
+<script type='text/javascript' src='../../../libs/sui/js/zepto.js' charset='utf-8'></script>
+<script type='text/javascript' src='../../../libs/sui/js/sm.js' charset='utf-8'></script>
+<script type='text/javascript' src='../../../libs/sui/js/sm-extend.js' charset='utf-8'></script>
+<script type="text/javascript" src="../../../libs/sui/js/sm-city-picker.js" charset="utf-8"></script>
+<!--轮播图插件-->
+<script type='text/javascript' src='../../../libs/jquery/jquery-1.11.2.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='../js/jquery.cookie.js' charset='utf-8'></script>
+<script type='text/javascript' src="../../../libs/jquery/jquery-migrate-1.2.1.js"></script>
+<script type='text/javascript' src='../../../libs/jquery/jquery.touchslider.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='../../../libs/hdk-latest.js' charset="UTF-8"></script>
+<script>var _pageid = '10';//当前页面id</script>
+<script type='text/javascript' src='../js/global.js' charset="UTF-8"></script>
+<script type='text/javascript' src='../js/store/goods.js' charset="UTF-8"></script>
+<!--<script id="-mob-share" src="http://f1.webshare.mob.com/code/mob-share.js?appkey=bf017e1155f0"></script>-->
+<script>
+    if (!_isRrsljMobile()) {
+        var scriptObj = document.createElement("script");
+        scriptObj.src = "http://f1.webshare.mob.com/code/mob-share.js?appkey=bf017e1155f0";
+        scriptObj.type = "text/javascript";
+        scriptObj.async = true;
+        scriptObj.id = "-mob-share";
+        document.getElementsByTagName("body")[0].appendChild(scriptObj);
+    }
+</script>
+<script type="text/javascript">
+    (function() {
+        var lzhd = document.createElement('script');
+        lzhd.type = 'text/javascript'; lzhd.async = true;
+        lzhd.src = document.location.protocol+'//liangzi1.haier.net/collect-common-nojq.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(lzhd, s);
+    })();
+</script>
+<script type='text/javascript' src='../js/globalHdkInit.js' charset='utf-8'></script>
+</body>
+</html>
