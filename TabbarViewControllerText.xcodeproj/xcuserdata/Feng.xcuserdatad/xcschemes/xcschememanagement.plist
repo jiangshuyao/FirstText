@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>Meetime.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>9</integer>
+		</dict>
+		<key>SYLOVE.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>TabbarViewControllerText.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>B214A79D1CD05CD300DACCC9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B2B7A6B91CCE0AAB002A7B3F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B2B7A6D21CCE0AAB002A7B3F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B2C241DE1CD0D98F00386E1A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>

@@ -1,0 +1,44 @@
+
+
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <h1 id="myHeader">Hello World!</h1>
+        <div style="margin-top: 100px">
+            <h1>Objective-C和JavaScript交互的那些事</h1>
+            <input type="button" value="CallCamera" onclick="JSModel.callCamera()">
+                </div>
+        
+        <div>
+            <input type="button" value="Share" onclick="callShare()">
+                </div>
+        <div>
+            <input type="button" value="调用本地二维码扫描" onclick="textClick()">
+                </div>
+        
+        <script>
+            var callShare = function() {
+                var shareInfo = JSON.stringify({"title": "标题", "desc": "内容", "shareUrl": "http://www.jianshu.com/p/f896d73c670a",
+                                               "shareIco":"http://upload-images.jianshu.io/upload_images/1192353-fd26211d54aea8a9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"});
+                                               JSModel.share(shareInfo);
+            }
+        
+        var picCallback = function(photos) {
+            message('上传成功');
+            document.getElementById("myHeader").innerHTML=photos;
+        }
+        
+        var shareCallback = function(){
+            alert('success');
+        }
+        
+        var textClick = function(){
+            scanCode();
+        }
+        
+        </script>
+    </body>
+</html>
